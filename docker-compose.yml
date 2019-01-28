@@ -1,0 +1,27 @@
+version: '2'
+services:
+  # es
+  elasticsearch:
+    build: elasticsearch
+    volumes:
+        - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+        - 9200:9200
+    expose:
+        - 9300
+  # kibana
+  kibana:
+    build: kibana
+    ports:
+        - 5601:5601
+  # py module
+  python:
+    build: python
+    volumes:
+        - .:/python
+    ports:
+        - 5000:5000
+
+volumes:
+    elasticsearch-data:
+        driver: local
